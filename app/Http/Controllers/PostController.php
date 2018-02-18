@@ -5,6 +5,7 @@
 
 	use App\Http\Controllers\Controller;
 	use App\Post;
+	use App\Category;
 
 	/**
 	* Index
@@ -15,8 +16,10 @@
 		function index()
 		{
 			$posts = Post::all();
+			$cats = Category::all();
 			return view("post/index",[
-				"posts" => $posts
+				"posts" => $posts,
+				"cats" => $cats
 			]);
 		}
 		function view($id)
@@ -32,7 +35,7 @@
 			$post = new Post();
 			$post->title = request()->title;
 			$post->body = request()->body;
-			$post->category_id = 1;
+			$post->category_id = request()-> category_id;
 			$post->save();
 
 			return redirect('post/list');
@@ -58,7 +61,7 @@
 			$post = Post::find($id);
 			$post->title = request()->title;
 			$post->body = request()->body;
-			$post->category_id = 1;
+			$post->category_id = request()->category_id;
 			$post->save();
 
 

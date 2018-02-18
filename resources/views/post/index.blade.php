@@ -14,7 +14,7 @@
 				<td>
 					<a href="{{url('/post/view/'.$post->id)}}">{{$post['title']}}</a>
 				</td>
-				<td>-</td>
+				<td>{{$post->category->name}}</td>
 				<td>{{$post->created_at}}</td>
 				<td>
 					<a href="{{url('/post/edit/'. $post->id)}}">Edit</a>
@@ -36,6 +36,11 @@
 		Body <br>
 		<textarea name="body" rows="8" cols="80"></textarea><br> <br>
 
+		<select name="category_id">
+			@foreach($cats as $cat)
+			<option value="{{$cat->id}}">{{$cat->name}}</option>
+			@endforeach
+		</select>
 		<input type="submit" name="Add Post">
 	</form>
 @stop
